@@ -8,8 +8,6 @@ const express = require("express");
 const app = express();
 const { Todo } = require("./models");
 const bodyParser = require("body-parser");
-const { request } = require("express");
-const { agent } = require("supertest");
 const path = require("path");
 
 app.use(bodyParser.json());
@@ -30,13 +28,10 @@ app.get("/", async (request, response) => {
     });
   }
 });
-
-// app.get("/", function (request, response) {
-//   response.send("Hello World");
-// });
-app.get("/", function (request, response) {
+ app.get("/", function (request, response) {
   console.log("Todo list", request.body);
-});
+ });
+
 app.get("/todos", async function (request, response) {
   console.log("Processing list of all Todos ...");
   try {
