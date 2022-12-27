@@ -15,3 +15,6 @@ header {
   font-size: 35px;
   color: white;
 }
+.Todo-Item:hover .trash-icon {
+  display: block;
+}
