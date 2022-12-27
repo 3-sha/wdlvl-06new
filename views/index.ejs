@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="./css/styles.css">
-    <title>Document</title>
-</head>
-<body>
-   <div class="grid grid-cols-6">
+    <title>TO-DO Manager</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body class="p-4">
+    <div class="grid grid-cols-6">
       <div class="col-start-3 col-span-2"><%- include('header.ejs') %></div>
     </div>
+
     <form class="flex justify-center">
       <div class="flex gap-2 py-4 w-2/3">
         <div class="flex-auto w-64">
@@ -39,8 +39,9 @@
         </div>
       </div>
     </form>
-    <body class="mt-2">
-    <h5 style="display:inline"><id>Overdue</h5>
+
+    <div class="mt-2">
+      <h5 style="display:inline"><id>Overdue</h5>
       <span style="text-align:right" id='count-overdue' class="bg-gray-200 text-black px-3 py-1 rounded font-medium mr-2 mb-2">1</span>
       <%- include('todos.ejs') %>
       <h5 style="display:inline">Due Today</h5>
@@ -52,5 +53,5 @@
     </div>
 
     <div class="flex justify-center"><%- include('footer.ejs') %></div>
-    </body>
+  </body>
 </html>
