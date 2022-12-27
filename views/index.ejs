@@ -7,23 +7,14 @@
     <link rel="stylesheet" href="./css/styles.css">
     <title>Document</title>
 </head>
-<body>
     <header>
         <%- include('header.ejs') %>
     </header>
-    
-    <table>
-    <% for( var i = 0; i < allTodos.length; i++) {%>
-        <tr>
-            <td>
-               <%= allTodos[i].title %> 
-            </td>
-        </tr>
-        <% } %>
-    </table>
+    <body>
+    <%- include('todo.ejs') %>
+    </body>
+
     <footer>
         <%- include('footer.ejs') %>
     </footer>
-    
-</body>
 </html>
