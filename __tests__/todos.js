@@ -73,7 +73,7 @@ describe("Todo Application", function () {
     const parsedResponse = JSON.parse(response.text);
 
     expect(parsedResponse.length).toBe(4);
-    expect(parsedResponse[3]["title"]).toBe("Buy ps3");
+    expect(parsedResponse[3].title).toBe("Buy ps3");
   });
 
   test("Deletes a todo with the given ID if it exists and sends a boolean response", async () => {
