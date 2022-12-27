@@ -4,7 +4,6 @@
 /* eslint-disable semi */
 /* eslint-disable quotes */
 const request = require("supertest");
-
 const db = require("../models/index");
 const app = require("../app");
 
@@ -20,13 +19,13 @@ describe("Todo Application", function () {
   afterAll(async () => {
     try {
       await db.sequelize.close();
-      await server.close();
+      server.close();
     } catch (error) {
       console.log(error);
     }
   });
 
-  test("Creates a todo and responds with json at /todos POST endpoint", async () => {
+  test("Creates a todo and responds with json at /todos", async () => {
     const response = await agent.post("/todos").send({
       title: "Buy milk",
       dueDate: new Date().toISOString(),
@@ -40,7 +39,7 @@ describe("Todo Application", function () {
     expect(parsedResponse.id).toBeDefined();
   });
 
-  test("Marks a todo with the given ID as complete", async () => {
+  test("Marks a todo as complete", async () => {
     const response = await agent.post("/todos").send({
       title: "Buy milk",
       dueDate: new Date().toISOString(),
@@ -58,36 +57,19 @@ describe("Todo Application", function () {
     expect(parsedUpdateResponse.completed).toBe(true);
   });
 
-  test("Fetches all todos in the database using /todos endpoint", async () => {
-    await agent.post("/todos").send({
-      title: "Buy xbox",
-      dueDate: new Date().toISOString(),
-      completed: false,
-    });
-    await agent.post("/todos").send({
-      title: "Buy ps3",
-      dueDate: new Date().toISOString(),
-      completed: false,
-    });
-    const response = await agent.get("/todos");
-    const parsedResponse = JSON.parse(response.text);
-
-    expect(parsedResponse.length).toBe(4);
-    expect(parsedResponse[3].title).toBe("Buy ps3");
-  });
-
+ 
   test("Deletes a todo with the given ID if it exists and sends a boolean response", async () => {
     // FILL IN YOUR CODE HERE
-    const response = await agent.post("/todos").send({
-      title: "Go to market",
+    const todo = await agent.post("/todos").send({
+      title: "delete",
       dueDate: new Date().toISOString(),
       completed: false,
     });
-    const parsedResponse = JSON.parse(response.text);
+    const parsedResponse = JSON.parse(todo.text);
     const todoID = parsedResponse.id;
-
-    const deleteTodoResponse = await agent.delete(`/todos/${todoID}`).send();
-    const parsedDeleteResponse = JSON.parse(deleteTodoResponse.text);
-    expect(parsedDeleteResponse).toBe(true);
+    expect(parsedResponse.title).toBe("delete");
+    const deleteTodoResponse = await agent.delete(`/todos/${todoID}`);
+    const parsedDeleteResponse = JSON.parse(response.text);
+    expect(parsedDeleteResponse).toStrictEqual({});
   });
 });
